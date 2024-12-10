@@ -1,14 +1,12 @@
 import { SafeAreaView, StyleSheet, Text} from "react-native";
 
-const Home = () => {
+export default function Home() {
   return (
     <SafeAreaView style={styles.container}>
       <Text>Home</Text>
     </SafeAreaView>
   );
 }
-
-export default Home;
 
 const styles = StyleSheet.create({
 container: {
