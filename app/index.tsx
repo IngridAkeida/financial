@@ -1,7 +1,17 @@
 import { router } from "expo-router";
 import { Button, SafeAreaView, StyleSheet, Text} from "react-native";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+
+  const [movies, setMovies] = useState([]);
+
+  const getProducts = async () => {
+    const response = await fetch('http://site.com.products');
+    const data = await response.json();
+    console.log(data);
+  }
+
   const handleButton = () => {
     //jeito mais simples
     // router.push('./about?name=John&age=30'); 
