@@ -1,9 +1,17 @@
+import { useLocalSearchParams } from "expo-router";
 import { SafeAreaView, StyleSheet, Text} from "react-native";
 
+type Query = {
+  name?: string;
+}
+
 export default function About() {
+  
+  const { name } = useLocalSearchParams<Query>();
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text>about</Text>
+      <Text>about {name} </Text>
     </SafeAreaView>
   );
 }
