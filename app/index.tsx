@@ -29,8 +29,7 @@ export default function Home() {
     params.set('age', '30');
     router.push(`/about?${params.toString()}`);
   };
-
-    
+ 
   return (
     <SafeAreaView style={styles.container}>
       <Button title="Is para Sobre (com params)"
@@ -38,7 +37,7 @@ export default function Home() {
       {loading && 
         <Text>Loading...</Text>
       }
-      
+
       {!loading && movies.length === 0 &&
         <Text>No movies found</Text>
       }
