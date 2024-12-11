@@ -15,17 +15,18 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     margin: 10,
-    backgroundColor: '#f9c',
+    backgroundColor: '#ddd',
     borderRadius: 10,
   },
   skeletonH2: {
     height:30,
     borderRadius: 10,
-    backgroundColor: '#ddd',
+    backgroundColor: '#ccc',
+    marginBottom: 10,
   }, 
   skeletonLaunchDate: {
     height: 15,
     borderRadius: 10,
-    backgroundColor: '#ddd',
+    backgroundColor: '#ccc',
   }
 });

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Movies } from "../types/movies";
 import { getMoviesList } from "../services/movies";
 import { MovieItem } from "../components/movie-item";
+import { MovieItemSkeleton } from "../components/movie-item-skeleton";
 
 export default function Home() {
   const [loading, setLoading ] = useState(true);
@@ -36,6 +37,8 @@ export default function Home() {
       <Button title="Is para Sobre (com params)"
       onPress={handleButton}/>
       <Text style={styles.h1}> Movies</Text>
+      <MovieItemSkeleton/>
+
       {loading && 
         <Text>Loading...</Text>
       }
