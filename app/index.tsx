@@ -5,12 +5,14 @@ import { Movies } from "../types/movies";
 import { getMoviesList } from "../services/movies";
 
 export default function Home() {
-
+  const [loading, setLoading ] = useState(true);
   const [movies, setMovies] = useState<Movies[]>([]);
 
   const getMovies = async () => {
+    setLoading(true);
     const moviesList = await getMoviesList();
     setMovies(moviesList);
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -31,9 +33,11 @@ export default function Home() {
     
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Home</Text>
       <Button title="Is para Sobre (com params)"
       onPress={handleButton}/>
+      {loading && 
+        <Text>Loading...</Text>
+      }
       <View>
         <Text style={styles.h1}>Movies</Text>
         <Text>Qt. of Movies: {movies.length}</Text>
