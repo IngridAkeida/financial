@@ -38,6 +38,7 @@ export default function Home() {
       {loading && 
         <Text>Loading...</Text>
       }
+      
       {!loading && movies.length === 0 &&
         <Text>No movies found</Text>
       }
