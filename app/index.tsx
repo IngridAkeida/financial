@@ -38,11 +38,15 @@ export default function Home() {
       {loading && 
         <Text>Loading...</Text>
       }
+      {!loading && movies.length === 0 &&
+        <Text>No movies found</Text>
+      }
+
       <View>
         <Text style={styles.h1}>Movies</Text>
         <Text>Qt. of Movies: {movies.length}</Text>
         <Text>
-          {movies.map((movie) => 
+          {!loading && movies.length > 0 && movies.map((movie) => 
             `${movie.title} - ${movie.releaseYear}`
           ).join('\n')}
         </Text>
