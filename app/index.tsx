@@ -37,10 +37,15 @@ export default function Home() {
       <Button title="Is para Sobre (com params)"
       onPress={handleButton}/>
       <Text style={styles.h1}> Movies</Text>
-      <MovieItemSkeleton/>
 
       {loading && 
-        <Text>Loading...</Text>
+        <>
+          <MovieItemSkeleton/>
+          <MovieItemSkeleton/>
+          <MovieItemSkeleton/>
+          <MovieItemSkeleton/>
+          <MovieItemSkeleton/>
+        </>
       }
 
       {!loading && movies.length === 0 &&
