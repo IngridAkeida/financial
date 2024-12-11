@@ -1,16 +1,21 @@
 import { router } from "expo-router";
-import { Button, SafeAreaView, StyleSheet, Text} from "react-native";
+import { Button, SafeAreaView, StyleSheet, Text, View} from "react-native";
 import { useEffect, useState } from "react";
+import { Movies } from "../types/movies";
+import { getMoviesList } from "../services/movies";
 
 export default function Home() {
 
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState<Movies[]>([]);
 
-  const getProducts = async () => {
-    const response = await fetch('http://site.com.products');
-    const data = await response.json();
-    console.log(data);
+  const getMovies = async () => {
+    const moviesList = await getMoviesList();
+    setMovies(moviesList);
   }
+
+  useEffect(() => {
+    getMovies();
+  }, []);
 
   const handleButton = () => {
     //jeito mais simples
@@ -29,14 +34,27 @@ export default function Home() {
       <Text>Home</Text>
       <Button title="Is para Sobre (com params)"
       onPress={handleButton}/>
+      <View>
+        <Text style={styles.h1}>Movies</Text>
+        <Text>Qt. of Movies: {movies.length}</Text>
+        <Text>
+          {movies.map((movie) => 
+            `${movie.title} - ${movie.releaseYear}`
+          ).join('\n')}
+        </Text>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-container: {
-  flex: 1,
-  justifyContent: 'center',
-  alignItems: 'center',
-},
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  h1: {
+    fontSize:30,
+    textAlign: 'center',  
+  }
 });
