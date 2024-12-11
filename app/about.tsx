@@ -3,15 +3,16 @@ import { SafeAreaView, StyleSheet, Text} from "react-native";
 
 type Query = {
   name?: string;
+  age?: string;
 }
 
 export default function About() {
   
-  const { name } = useLocalSearchParams<Query>();
+  const { name, age } = useLocalSearchParams<Query>();
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text>about {name} </Text>
+      <Text>about {name} - { age } </Text>
     </SafeAreaView>
   );
 }
