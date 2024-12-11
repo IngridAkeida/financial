@@ -9,7 +9,6 @@ export const getMoviesList = async () => {
     }
     return [];
   } catch (error) {
-    console.error('Error fetching movies', error);
-    return [];
+    return false;
   }
 }

@@ -7,14 +7,21 @@ import { MovieItem } from "../components/movie-item";
 import { MovieItemSkeleton } from "../components/movie-item-skeleton";
 
 export default function Home() {
+  const [error, setError] = useState(false);
   const [loading, setLoading ] = useState(true);
   const [movies, setMovies] = useState<Movies[]>([]);
 
   const getMovies = async () => {
     setLoading(true);
     const moviesList = await getMoviesList();
-    setMovies(moviesList);
     setLoading(false);
+
+    if (moviesList === false) {
+      setError(true);
+    } else {
+      setMovies(moviesList);
+    }
+
   }
 
   useEffect(() => {
@@ -48,8 +55,15 @@ export default function Home() {
         </>
       }
 
-      {!loading && movies.length === 0 &&
+      {!loading && movies.length === 0 && !error &&
         <Text>No movies found</Text>
+      }
+
+      {!loading && movies.length === 0 && error &&
+        <>
+          <Text>Error loading movies</Text>
+          <Button title="Try again" onPress={getMovies}/>
+        </>
       }
       
       <Text>Qt. of Movies: {movies.length}</Text>
