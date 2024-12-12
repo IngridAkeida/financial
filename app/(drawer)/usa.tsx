@@ -25,7 +25,7 @@ export default function Usa() {
         <>
           <Image 
             style={styles.image}
-            source={require('../assets/money/dolar.png')}
+            source={require('../../assets/money/dolar.png')}
             resizeMode="contain"
           />
           <Text style={styles.title}>USA</Text>
