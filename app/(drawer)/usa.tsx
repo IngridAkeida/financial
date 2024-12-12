@@ -1,7 +1,7 @@
 import {Image, SafeAreaView, StyleSheet, Text} from "react-native";
-import { Btn } from "../components/button";
+import { Btn } from "../../components/button";
 import { useEffect, useState } from "react";
-import { getDollarQuotes } from "../services/dollarQuotes";
+import { getDollarQuotes } from "../../services/dollarQuotes";
 
 export default function Usa() {
   const [loading, setLoading] = useState(true);

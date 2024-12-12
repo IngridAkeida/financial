@@ -1,7 +1,7 @@
-import {Image, SafeAreaView, StyleSheet, Text} from "react-native";
-import { Btn } from "../components/button";
+import { Image, SafeAreaView, StyleSheet, Text } from "react-native";
+import { Btn } from "../../components/button";
 import { useEffect, useState } from "react";
-import { getEuroQuotes } from "../services/euroQuotes";
+import { getEuroQuotes } from "../../services/euroQuotes";
 
 export default function Usa() {
   const [loading, setLoading] = useState(true);
@@ -12,7 +12,7 @@ export default function Usa() {
     const euro = await getEuroQuotes();
     setLoading(false);
     setCurrentValue(euro);
-  }
+  };
 
   useEffect(() => {
     handleUpdate();
@@ -21,20 +21,19 @@ export default function Usa() {
   return (
     <SafeAreaView style={styles.container}>
       {loading && <Text>Loading...</Text>}
-      {!loading && 
-       <>
-          <Image 
+      {!loading && (
+        <>
+          <Image
             style={styles.image}
-            source={require('../assets/money/euro.png')}
+            source={require("../assets/money/euro.png")}
             resizeMode="contain"
           />
           <Text style={styles.title}>Euro</Text>
           <Text style={styles.h2}>The Euro is worth</Text>
           <Text style={styles.currency}>R$ {currentValue.toFixed(2)}</Text>
-          <Btn onPress={handleUpdate} label="Update"/>
+          <Btn onPress={handleUpdate} label="Update" />
         </>
-      }
-
+      )}
     </SafeAreaView>
   );
 }
@@ -42,9 +41,9 @@ export default function Usa() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor:'#0b1c2d',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#0b1c2d",
     paddingHorizontal: 20,
   },
   image: {
@@ -52,22 +51,21 @@ const styles = StyleSheet.create({
     height: 180,
   },
   title: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 24,
-    textAlign: 'center',
-    fontWeight: 'bold',
+    textAlign: "center",
+    fontWeight: "bold",
     marginTop: 20,
   },
   h2: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 20,
-    textAlign: 'center',
+    textAlign: "center",
   },
   currency: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 52,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 50,
   },
 });
-
