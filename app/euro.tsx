@@ -21,16 +21,19 @@ export default function Usa() {
   return (
     <SafeAreaView style={styles.container}>
       {loading && <Text>Loading...</Text>}
-      <Image 
-        style={styles.image}
-        source={require('../assets/money/dolar.png')}
-        resizeMode="contain"
-      />
-      <Text style={styles.title}>Euro</Text>
-      <Text style={styles.h2}>The Euro is worth</Text>
-      <Text style={styles.currency}>R$ {currentValue.toFixed(2)}</Text>
-
-      <Btn onPress={handleUpdate} label="Update"/>
+      {!loading && 
+       <>
+          <Image 
+            style={styles.image}
+            source={require('../assets/money/dolar.png')}
+            resizeMode="contain"
+          />
+          <Text style={styles.title}>Euro</Text>
+          <Text style={styles.h2}>The Euro is worth</Text>
+          <Text style={styles.currency}>R$ {currentValue.toFixed(2)}</Text>
+          <Btn onPress={handleUpdate} label="Update"/>
+        </>
+      }
 
     </SafeAreaView>
   );
