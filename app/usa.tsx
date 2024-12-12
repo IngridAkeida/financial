@@ -1,6 +1,11 @@
-import { Image, SafeAreaView, StyleSheet, Text} from "react-native";
+import {Image, SafeAreaView, StyleSheet, Text} from "react-native";
+import { Btn } from "../components/button";
 
 export default function Usa() {
+
+  const handleUpdate = () => {
+    console.log('Something');
+  }
 
   return (
     <SafeAreaView style={styles.container}>
@@ -12,6 +17,8 @@ export default function Usa() {
       <Text style={styles.title}>USA</Text>
       <Text style={styles.h2}>The dollar is worth</Text>
       <Text style={styles.currency}>R$ 99,99</Text>
+
+      <Btn onPress={handleUpdate} label="Update"/>
 
     </SafeAreaView>
   );
