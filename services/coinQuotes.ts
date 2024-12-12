@@ -1,6 +1,6 @@
 // import { CoinQuotes } from "../types/coinQuotes";
 //show every coin quotes
-let baseUrl = 'https://economia.awesomeapi.com.br/json/;'
+let baseUrl = 'https://economia.awesomeapi.com.br/json/';
 
 export const getQuotes = async () => {
   let url = baseUrl + 'all';

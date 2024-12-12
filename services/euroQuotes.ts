@@ -1,7 +1,7 @@
 //show dollar to brl coin quote
-let baseUrl = 'https://economia.awesomeapi.com.br/json/;'
+let baseUrl = 'https://economia.awesomeapi.com.br/json/';
 
-export const getEURQuotes = async () => {
+export const getEuroQuotes = async () => {
   let url = baseUrl + 'last/EUR-BRL';
   try{
     const response = await fetch(url);
@@ -9,7 +9,7 @@ export const getEURQuotes = async () => {
     if(data.EURBRL) {
       return parseFloat(data.EURBRL.ask);
     }
-    return [];
+    return 0;
   } catch (error) {
     return 0;
   }

@@ -1,17 +1,26 @@
 import {Image, SafeAreaView, StyleSheet, Text} from "react-native";
 import { Btn } from "../components/button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getDollarQuotes } from "../services/dollarQuotes";
 
 export default function Usa() {
+  const [loading, setLoading] = useState(true);
+  const [currentValue, setCurrentValue] = useState<number>(0);
 
-  const [dollar , setDollar] = useState(0);
-
-  const handleUpdate = () => {
-    console.log('Something');
+  const handleUpdate = async () => {
+    setLoading(true);
+    const dollar = await getDollarQuotes();
+    setLoading(false);
+    setCurrentValue(dollar);
   }
+
+  useEffect(() => {
+    handleUpdate();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
+      {loading && <Text>Loading...</Text>}
       <Image 
         style={styles.image}
         source={require('../assets/money/dolar.png')}
@@ -19,7 +28,7 @@ export default function Usa() {
       />
       <Text style={styles.title}>USA</Text>
       <Text style={styles.h2}>The dollar is worth</Text>
-      <Text style={styles.currency}>R$ 99,99</Text>
+      <Text style={styles.currency}>R$ {currentValue.toFixed(2)}</Text>
 
       <Btn onPress={handleUpdate} label="Update"/>
 
