@@ -1,5 +1,6 @@
 import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
 import { router } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
 
 export default function index() {
 
@@ -7,14 +8,14 @@ export default function index() {
     router.replace('/home');
   }
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <Image source={require('../assets/sources/logo.png')} style={styles.logo} resizeMode="cover"/> */}
+    <LinearGradient colors={['#00a1b6', '#006977', '#00a1b6']} style={styles.container}>
+      <Image source={require('../assets/money/logo.png')} style={styles.logo} resizeMode="cover"/>
       <View>
-        <Text style={styles.h1}> Ingrid's Store</Text>
-        <Text style={styles.h2}> Here you can find everything you want!</Text>
+        <Text style={styles.h1}>Take Control</Text>
+        <Text style={styles.h2}>quotes around the World</Text>
         {/* <Button title="Let's Start!" onPress={handleStart}/> */}
       </View>
-    </SafeAreaView>
+    </LinearGradient>
   );
 }
 
@@ -23,21 +24,27 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    height: '100%',
+    fontFamily: 'Roboto',
   },
   logo:{
     width: 200,
     height: 200,
-    marginBottom: 20,
+    marginBottom: 10,
   },
   h1: {
-    fontSize: 22,
-    fontWeight: 'bold',
+    fontSize: 50,
+    fontWeight: 'semibold',
     textAlign: 'center',
-    marginBottom: 10,
+    marginBottom: -6,
+    color: '#fff',
   },
   h2: {
-    fontSize: 20,
+    fontSize: 25,
     textAlign: 'center',
     marginBottom: 10,
+    color: '#fff',
+    fontStyle: 'italic',
+    fontWeight: 'light',
   },
 });
