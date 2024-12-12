@@ -1,7 +1,10 @@
 import {Image, SafeAreaView, StyleSheet, Text} from "react-native";
 import { Btn } from "../components/button";
+import { useState } from "react";
 
 export default function Usa() {
+
+  const [dollar , setDollar] = useState(0);
 
   const handleUpdate = () => {
     console.log('Something');
