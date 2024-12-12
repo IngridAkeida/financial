@@ -27,6 +27,22 @@ export default function RootLayout() {
           }}
         />
         <Drawer.Screen
+          name="usa"
+          options={{
+            drawerLabel: 'Dollar-USA',
+            title: 'USA',
+            drawerIcon: ({color, size}) => <View style={{width: size, height: size, backgroundColor:color, borderRadius:20}}></View>,
+          }}
+        />
+        <Drawer.Screen
+          name="euro"
+          options={{
+            drawerLabel: 'EURO',
+            title: 'EURO',
+            drawerIcon: ({color, size}) => <View style={{width: size, height: size, backgroundColor:color, borderRadius:20}}></View>,
+          }}
+        />
+        <Drawer.Screen
           name="about"
           options={{
             drawerLabel: 'About Us',
