@@ -19,6 +19,7 @@ const CurrencyConverter = () => {
         const data = await response.json();
         const rate = data[`${currency}`].bid;
         setConversionRate(rate);
+        console.log(currency1, currency2, rate);
       } catch (error) {
         // Alert.alert('Erro', 'Não foi possível buscar a taxa de conversão.');
       }
@@ -41,6 +42,15 @@ const CurrencyConverter = () => {
       <Text style={styles.title}>Conversor de Moeda</Text>
       <View style={styles.content}>
         <View style={styles.wrap}>
+          <Picker
+              selectedValue={currency}
+              style={styles.picker}
+              onValueChange={(itemValue: string) => setCurrency1(itemValue)}
+            >
+              {currencies.map((curr) => (
+                <Picker.Item key={curr} label={curr} value={curr} />
+              ))}
+          </Picker>
           <TextInput
             style={styles.input}
             placeholder="Valor"
@@ -48,24 +58,8 @@ const CurrencyConverter = () => {
             onChangeText={setValue} 
             keyboardType="numeric"
           />
-          <Picker
-            selectedValue={currency}
-            style={styles.picker}
-            onValueChange={(itemValue: string) => setCurrency1(itemValue)}
-          >
-            {currencies.map((curr) => (
-              <Picker.Item key={curr} label={curr} value={curr} />
-            ))}
-          </Picker>
         </View>
         <View style={styles.wrap}>
-          <TextInput
-            style={styles.input}
-            placeholder="Valor"
-            value={value}
-            onChangeText={setValue} 
-            keyboardType="numeric"
-          />
           <Picker
             selectedValue={currency}
             style={styles.picker}
@@ -75,6 +69,13 @@ const CurrencyConverter = () => {
               <Picker.Item key={curr} label={curr} value={curr} />
             ))}
           </Picker>
+          <TextInput
+            style={styles.input}
+            placeholder="Valor"
+            value={value}
+            onChangeText={setValue} 
+            keyboardType="numeric"
+          />
         </View>
         <View style={styles.btn}>
           <Button title="Converter" onPress={handleConvert} color="#fff"/>
