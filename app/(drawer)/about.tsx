@@ -54,20 +54,6 @@ const CurrencyConverter = () => {
     <LinearGradient colors={['#05d9f5', '#006977', '#05d9f5']} style={styles.container}>
       <Text style={styles.title}>Conversor de Moeda</Text>
       <View>
-        <View>
-          <SelectDropdown
-            data={currencies}
-            defaultValue={currency1}
-            onSelect={(selectedItem) => setCurrency1(selectedItem)}
-            buttonStyle={styles.dropdown}
-          />
-          <SelectDropdown
-            data={currencies}
-            defaultValue={currency2}
-            onSelect={(selectedItem) => setCurrency2(selectedItem)}
-            buttonStyle={styles.dropdown}
-          />
-        </View>
         <TextInput
           placeholder="Valor"
           value={value}
