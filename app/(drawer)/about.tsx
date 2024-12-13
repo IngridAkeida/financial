@@ -7,7 +7,7 @@ import {
   StyleSheet, 
   TouchableOpacity 
 } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
+import SelectDropdown from 'react-native-select-dropdown';
 import { Currencies } from '../../services/coinName';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -21,24 +21,31 @@ const CurrencyConverter = () => {
   useEffect(() => {
     const fetchConversionRate = async () => {
       try {
-        const currencyPair = `${currency1}${currency2}`;
-        const response = await fetch(`https://economia.awesomeapi.com.br/json/last/${currencyPair}`);
+        const currency = `${currency1}-${currency2}`;
+        const response = await fetch(
+          `https://economia.awesomeapi.com.br/json/last/${currency}`
+        );
         const data = await response.json();
-        const rate = data[currencyPair]?.bid || 0;
-        setConversionRate(parseFloat(rate));
+        const rate = data[currency]?.bid;
+        if (rate) {
+          setConversionRate(parseFloat(rate));
+        } else {
+          setConversionRate(0);
+          // Alert.alert('Erro', 'Não foi possível buscar a taxa de conversão.');
+        }
       } catch (error) {
-        Alert.alert('Erro', 'Não foi possível buscar a taxa de conversão.');
+        // Alert.alert('Erro', 'Não foi possível buscar a taxa de conversão.');
       }
     };
     fetchConversionRate();
   }, [currency1, currency2]);
 
+  // Handle conversion
   const handleConvert = () => {
-    if (!value) {
-      Alert.alert('Erro', 'Por favor, insira um valor.');
+    if (!value || isNaN(value)) {
+      Alert.alert('Erro', 'Por favor, insira um valor numérico válido.');
       return;
     }
-
     const convertedValue = (parseFloat(value) * conversionRate).toFixed(2);
     Alert.alert('Resultado', `O valor convertido é: ${currency2} ${convertedValue}`);
   };
@@ -46,38 +53,27 @@ const CurrencyConverter = () => {
   return (
     <LinearGradient colors={['#05d9f5', '#006977', '#05d9f5']} style={styles.container}>
       <Text style={styles.title}>Conversor de Moeda</Text>
-      <View style={styles.content}>
-        <View style={styles.wrap}>
-          <Picker
-            selectedValue={currency1}
-            style={styles.picker}
-            onValueChange={(itemValue) => setCurrency1(itemValue)}
-          >
-            {currencies.map((curr) => (
-              <Picker.Item key={curr} label={curr} value={curr} />
-            ))}
-          </Picker>
-
-          <Picker
-            selectedValue={currency2}
-            style={styles.picker}
-            onValueChange={(itemValue) => setCurrency2(itemValue)}
-          >
-            {currencies.map((curr) => (
-              <Picker.Item key={curr} label={curr} value={curr} />
-            ))}
-          </Picker>
-
-        </View>
-        <View style={styles.wrap2}>
-          <TextInput
-            style={styles.input}
-            placeholder="Valor"
-            value={value}
-            onChangeText={setValue}
-            keyboardType="numeric"
+      <View>
+        <View>
+          <SelectDropdown
+            data={currencies}
+            defaultValue={currency1}
+            onSelect={(selectedItem) => setCurrency1(selectedItem)}
+            buttonStyle={styles.dropdown}
+          />
+          <SelectDropdown
+            data={currencies}
+            defaultValue={currency2}
+            onSelect={(selectedItem) => setCurrency2(selectedItem)}
+            buttonStyle={styles.dropdown}
           />
         </View>
+        <TextInput
+          placeholder="Valor"
+          value={value}
+          onChangeText={setValue}
+          keyboardType="numeric"
+        />
         <TouchableOpacity style={styles.btn} onPress={handleConvert}>
           <Text style={styles.btnText}>Converter</Text>
         </TouchableOpacity>
@@ -113,17 +109,21 @@ const styles = StyleSheet.create({
     width: '100%',
     marginBottom: 16,
   },
-  picker: {
+  dropdown: {
     width: '45%',
     backgroundColor: '#f9f9f9',
     borderRadius: 4,
+    elevation: 2,
   },
   input: {
-    width: '45%',
+    width: '100%',
     height: 40,
     backgroundColor: '#f9f9f9',
     borderRadius: 4,
     paddingHorizontal: 8,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#ddd',
   },
   btn: {
     width: '90%',
