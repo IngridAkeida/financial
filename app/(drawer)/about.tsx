@@ -63,7 +63,7 @@ const CurrencyConverter = () => {
             }}
           >
             {Currencies.map((curr) => (
-              <Picker.Item key={curr.code} label={curr.name} value={curr.code} />
+              <Picker.Item key={curr.code} label={`${curr.code} - ${curr.name}`} value={curr.code} />
             ))}
           </Picker>
           <TextInput
@@ -92,8 +92,8 @@ const CurrencyConverter = () => {
               handleConvert(value); 
             }}
           >
-            {currenciesCode.map((curr) => (
-              <Picker.Item key={curr} label={curr} value={curr} />
+            {Currencies.map((curr) => (
+              <Picker.Item key={curr.code} label={`${curr.code} - ${curr.name}`} value={curr.code} />
             ))}
           </Picker>
         </View>
