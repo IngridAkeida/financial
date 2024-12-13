@@ -26,7 +26,7 @@ const CurrencyConverter = () => {
           `https://economia.awesomeapi.com.br/json/last/${currency}`
         );
         const data = await response.json();
-        const rate = data[currency]?.bid;
+        const rate = data?.bid;
         if (rate) {
           setConversionRate(parseFloat(rate));
         } else {
