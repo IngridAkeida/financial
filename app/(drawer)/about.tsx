@@ -18,7 +18,6 @@ const CurrencyConverter = () => {
   const [currency2, setCurrency2] = useState('BRL');
   const [conversionRate, setConversionRate] = useState(0);
   const currencies = Currencies.map((curr) => curr.code);
-  const [selectedValue, setSelectedValue] = useState('option1');
 
   useEffect(() => {
     const fetchConversionRate = async () => {
@@ -30,6 +29,7 @@ const CurrencyConverter = () => {
         const data = await response.json();
         const rate = data[currencyPair]?.bid || 0;
         setConversionRate(parseFloat(rate));
+        handleConvert(value);
       } catch (error) {
         Alert.alert('Erro', 'Não foi possível buscar a taxa de conversão.');
       }
@@ -37,12 +37,12 @@ const CurrencyConverter = () => {
     fetchConversionRate();
   }, [currency1, currency2]);
 
-  const handleConvert = () => {
-    if (!value || isNaN(Number(value))) {
-      Alert.alert('Erro', 'Por favor, insira um valor numérico válido.');
+  const handleConvert = (inputValue: string) => {
+    if (!inputValue || isNaN(Number(inputValue))) {
+      setConvertedValue('');
       return;
     }
-    const result = (parseFloat(value) * conversionRate).toFixed(2);
+    const result = (parseFloat(inputValue) * conversionRate).toFixed(2);
     setConvertedValue(result);
   };
 
@@ -56,15 +56,21 @@ const CurrencyConverter = () => {
         <View style={styles.row}>
           <TextInput
             style={styles.input}
-            placeholder="Value"
+            placeholder="Valor"
             value={value}
-            onChangeText={setValue}
+            onChangeText={(text) => {
+              setValue(text);
+              handleConvert(text);
+            }}
             keyboardType="numeric"
           />
           <Picker
-            selectedValue={selectedValue}
+            selectedValue={currency1}
             style={styles.picker}
-            onValueChange={(itemValue) => setSelectedValue(itemValue)}
+            onValueChange={(itemValue) => {
+              setCurrency1(itemValue);
+              handleConvert(value); 
+            }}
           >
             {currencies.map((curr) => (
               <Picker.Item key={curr} label={curr} value={curr} />
@@ -74,25 +80,24 @@ const CurrencyConverter = () => {
         <View style={styles.row}>
           <TextInput
             style={styles.input}
-            placeholder="Value"
-            value={value}
-            onChangeText={setValue}
-            keyboardType="numeric"
+            placeholder="Resultado"
+            value={convertedValue}
+            editable={false}
           />
           <Picker
-            selectedValue={selectedValue}
+            selectedValue={currency2}
             style={styles.picker}
-            onValueChange={(itemValue) => setSelectedValue(itemValue)}
+            onValueChange={(itemValue) => {
+              setCurrency2(itemValue);
+              handleConvert(value); 
+            }}
           >
             {currencies.map((curr) => (
               <Picker.Item key={curr} label={curr} value={curr} />
             ))}
           </Picker>
         </View>
-        <View style={styles.row}>
-          <Text style={styles.convertedValue}>{convertedValue || 'Resultado'}</Text>
-        </View>
-        <TouchableOpacity style={styles.btn} onPress={handleConvert}>
+        <TouchableOpacity style={styles.btn} onPress={() => handleConvert(value)}>
           <Text style={styles.btnText}>Converter</Text>
         </TouchableOpacity>
       </View>
@@ -148,15 +153,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  convertedValue: {
-    fontSize: 24,
-    color: '#333',
-    fontWeight: 'bold',
-  },
   picker: {
     height: 50,
     width: 150,
-    backgroundColor: '#333',
+    backgroundColor: '#fff',
   },
 });
 
