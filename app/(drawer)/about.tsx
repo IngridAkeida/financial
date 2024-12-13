@@ -49,24 +49,25 @@ const CurrencyConverter = () => {
       colors={['#05d9f5', '#006977', '#05d9f5']}
       style={styles.container}
     >
-      <Text style={styles.title}>Conversor de Moeda</Text>
-      <View style={styles.row}>
-        <TextInput
-          style={styles.input}
-          placeholder="Value"
-          value={value}
-          onChangeText={setValue}
-          keyboardType="numeric"
-        />
+      <View style={styles.wrap}>
+        <Text style={styles.title}>Conversor de Moeda</Text>
+        <View style={styles.row}>
+          <TextInput
+            style={styles.input}
+            placeholder="Value"
+            value={value}
+            onChangeText={setValue}
+            keyboardType="numeric"
+          />
 
+        </View>
+        <View style={styles.row}>
+          <Text style={styles.convertedValue}>{convertedValue || 'Resultado'}</Text>
+        </View>
+        <TouchableOpacity style={styles.btn} onPress={handleConvert}>
+          <Text style={styles.btnText}>Converter</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.row}>
-        <Text style={styles.convertedValue}>{convertedValue || 'Resultado'}</Text>
-      </View>
-
-      <TouchableOpacity style={styles.btn} onPress={handleConvert}>
-        <Text style={styles.btnText}>Converter</Text>
-      </TouchableOpacity>
     </LinearGradient>
   );
 };
@@ -84,6 +85,13 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
+  wrap: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff61',
+    padding: 16,
+    borderRadius: 8,
+  },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -97,29 +105,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#f9f9f9',
     borderRadius: 4,
     paddingHorizontal: 8,
-    marginRight: 8,
-    borderWidth: 1,
-    borderColor: '#ddd',
-  },
-  dropdown: {
-    width: 120,
-    backgroundColor: '#f9f9f9',
-    borderRadius: 4,
-    elevation: 2,
-  },
-  dropdownText: {
-    fontSize: 14,
-    textAlign: 'center',
-  },
-  convertedValue: {
-    flex: 1,
-    height: 50,
-    backgroundColor: '#f9f9f9',
-    borderRadius: 4,
-    paddingHorizontal: 8,
-    textAlignVertical: 'center',
-    textAlign: 'left',
-    marginRight: 8,
     borderWidth: 1,
     borderColor: '#ddd',
   },
