@@ -65,7 +65,7 @@ const CurrencyConverter = () => {
             <View style={styles.row}>
               <Text style={styles.title2}>From</Text>
               <Dropdown
-                value={currency2}
+                value={currency1}
                 data={currencies.map((curr) => ({
                   label: curr.name,
                   value: curr.code,
@@ -73,7 +73,7 @@ const CurrencyConverter = () => {
                 labelField="label"
                 valueField="value"
                 onChange={(item) => {
-                  setCurrency2(item.value);
+                  setCurrency1(item.value);
                   handleConvert(value);
                 }}
                 style={styles.drop}
@@ -92,7 +92,7 @@ const CurrencyConverter = () => {
             <View style={styles.row}>
               <Text style={styles.title2}>To</Text>
               <Dropdown
-                value={currency1}
+                value={currency2}
                 data={currencies.map((curr) => ({
                   label: curr.name,
                   value: curr.code,
@@ -100,7 +100,7 @@ const CurrencyConverter = () => {
                 labelField="label"
                 valueField="value"
                 onChange={(item) => {
-                  setCurrency1(item.value);
+                  setCurrency2(item.value);
                   handleConvert(value);
                 }}
                 style={styles.drop}
