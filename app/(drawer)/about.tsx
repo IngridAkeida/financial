@@ -39,45 +39,48 @@ const CurrencyConverter = () => {
   return (
     <LinearGradient colors={['#00a1b6', '#006977', '#00a1b6']} style={styles.container}>
       <Text style={styles.title}>Conversor de Moeda</Text>
-      <View style={styles.wrap}>
-        <TextInput
-          style={styles.input}
-          placeholder="Valor"
-          value={value}
-          onChangeText={setValue} 
-          keyboardType="numeric"
-        />
-        <Picker
-          selectedValue={currency}
-          style={styles.picker}
-          onValueChange={(itemValue: string) => setCurrency1(itemValue)}
-        >
-          {currencies.map((curr) => (
-            <Picker.Item key={curr} label={curr} value={curr} />
-          ))}
-        </Picker>
-      </View>
-      <View style={styles.wrap}>
-        <TextInput
-          style={styles.input}
-          placeholder="Valor"
-          value={value}
-          onChangeText={setValue} 
-          keyboardType="numeric"
-        />
-        <Picker
-          selectedValue={currency}
-          style={styles.picker}
-          onValueChange={(itemValue: string) => setCurrency2(itemValue)}
-        >
+      <View style={styles.content}>
+        <View style={styles.wrap}>
+          <TextInput
+            style={styles.input}
+            placeholder="Valor"
+            value={value}
+            onChangeText={setValue} 
+            keyboardType="numeric"
+          />
+          <Picker
+            selectedValue={currency}
+            style={styles.picker}
+            onValueChange={(itemValue: string) => setCurrency1(itemValue)}
+          >
+            {currencies.map((curr) => (
+              <Picker.Item key={curr} label={curr} value={curr} />
+            ))}
+          </Picker>
+        </View>
+        <View style={styles.wrap}>
+          <TextInput
+            style={styles.input}
+            placeholder="Valor"
+            value={value}
+            onChangeText={setValue} 
+            keyboardType="numeric"
+          />
+          <Picker
+            selectedValue={currency}
+            style={styles.picker}
+            onValueChange={(itemValue: string) => setCurrency2(itemValue)}
+          >
 
-          
-          {currencies.map((curr) => (
-            <Picker.Item key={curr} label={curr} value={curr} />
-          ))}
-        </Picker>
+            
+            {currencies.map((curr) => (
+              <Picker.Item key={curr} label={curr} value={curr} />
+            ))}
+          </Picker>
+        </View>
+        <Button title="Converter" onPress={handleConvert} />
       </View>
-      <Button title="Converter" onPress={handleConvert} />
+      
     </LinearGradient>
   );
 };
@@ -95,22 +98,31 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: '#f9f9f9',
-    padding: 8,
-    width: '50%',
+    padding: 2,
+    margin: 2,
+    width: '45%',
     height: 40,
     borderRadius: 4,
   },
   picker: {
-    width: '50%',
+    width: '45%',
     backgroundColor: '#f9f9f9',
-    margin: 8,
+    margin: 2,
     borderRadius: 4,
   },
   wrap: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'space-around',
     width: '100%',
     alignItems: 'center',
+    padding: 8,
+    borderRadius: 4,
+  },
+  content: {
+    width: '100%',
+    marginBottom: 20,
+    backgroundColor: '#f9f9f9a2',
+    borderRadius: 4,
   },
 });
 
