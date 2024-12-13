@@ -37,7 +37,7 @@ const CurrencyConverter = () => {
   };
 
   return (
-    <LinearGradient colors={['#00a1b6', '#006977', '#00a1b6']} style={styles.container}>
+    <LinearGradient colors={['#05d9f5', '#006977', '#05d9f5']} style={styles.container}>
       <Text style={styles.title}>Conversor de Moeda</Text>
       <View style={styles.content}>
         <View style={styles.wrap}>
@@ -71,14 +71,14 @@ const CurrencyConverter = () => {
             style={styles.picker}
             onValueChange={(itemValue: string) => setCurrency2(itemValue)}
           >
-
-            
             {currencies.map((curr) => (
               <Picker.Item key={curr} label={curr} value={curr} />
             ))}
           </Picker>
         </View>
-        <Button title="Converter" onPress={handleConvert} />
+        <View style={styles.btn}>
+          <Button title="Converter" onPress={handleConvert} color="#fff"/>
+        </View>
       </View>
       
     </LinearGradient>
@@ -123,6 +123,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     backgroundColor: '#f9f9f9a2',
     borderRadius: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  btn: {
+    width: '90%',
+    padding: 4,
+    borderRadius: 4,
+    backgroundColor: '#006977',
+    marginBottom: 10,
   },
 });
 
