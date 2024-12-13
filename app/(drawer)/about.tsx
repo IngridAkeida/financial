@@ -128,22 +128,22 @@ const styles = StyleSheet.create({
   col: {
     flexDirection: 'column',
     alignItems: 'center',
-    marginBottom: 16,
     width: '100%',
   },
   input: {
-    flex: 1,
-    width: '100%',
+    width: '90%',
     backgroundColor: '#f9f9f9',
     borderRadius: 4,
-    paddingHorizontal: 8,
-    borderWidth: 1,
     borderColor: '#ddd',
+    height: 50,
+    marginVertical: 4,
+    paddingLeft: 10,
   },
   picker: {
-    width: 150,
+    width: '90%',
     backgroundColor: '#fff',
     borderRadius: 4,
+    marginVertical: 4,
   },
   btn: {
     width: '90%',
