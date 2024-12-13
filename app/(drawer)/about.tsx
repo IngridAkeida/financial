@@ -56,7 +56,7 @@ const CurrencyConverter = () => {
         <View style={styles.row}>
           <TextInput
             style={styles.input}
-            placeholder="Valor"
+            placeholder="Value"
             value={value}
             onChangeText={(text) => {
               setValue(text);
@@ -80,7 +80,7 @@ const CurrencyConverter = () => {
         <View style={styles.row}>
           <TextInput
             style={styles.input}
-            placeholder="Resultado"
+            placeholder="Result"
             value={convertedValue}
             editable={false}
           />
@@ -131,6 +131,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginBottom: 16,
     width: '90%',
+    marginBottom: 20,
   },
   input: {
     flex: 1,
@@ -154,9 +155,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   picker: {
-    height: 50,
+    height: 200,
     width: 150,
     backgroundColor: '#fff',
+    borderRadius: 4,
   },
 });
 
