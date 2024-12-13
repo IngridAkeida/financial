@@ -6,6 +6,8 @@ import {
   Alert,
   StyleSheet,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from 'react-native';
 import { Currencies } from '../../services/coinName';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -47,61 +49,63 @@ const CurrencyConverter = () => {
   };
 
   return (
-    <LinearGradient
-      colors={['#05d9f5', '#006977', '#05d9f5']}
-      style={styles.container}
-    >
-      <View style={styles.wrap}>
-        <Text style={styles.title}>Conversor de Moeda</Text>
-        <View style={styles.col}>
-          <Picker
-            selectedValue={currency2}
-            style={styles.picker}
-            onValueChange={(itemValue) => {
-              setCurrency2(itemValue);
-              handleConvert(value); 
-            }}
-          >
-            {Currencies.map((curr) => (
-              <Picker.Item key={curr.code} label={`${curr.code} - ${curr.name}`} value={curr.code} />
-            ))}
-          </Picker>
-          <TextInput
-            style={styles.input}
-            placeholder="Value"
-            value={value}
-            onChangeText={(text) => {
-              setValue(text);
-              handleConvert(text);
-            }}
-            keyboardType="numeric"
-          />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <LinearGradient
+        colors={['#05d9f5', '#006977', '#05d9f5']}
+        style={styles.container}
+      >
+        <View style={styles.wrap}>
+          <Text style={styles.title}>Conversor de Moeda</Text>
+          <View style={styles.col}>
+            <Picker
+              selectedValue={currency2}
+              style={styles.picker}
+              onValueChange={(itemValue) => {
+                setCurrency2(itemValue);
+                handleConvert(value);
+              }}
+            >
+              {Currencies.map((curr) => (
+                <Picker.Item key={curr.code} label={`${curr.code} - ${curr.name}`} value={curr.code} />
+              ))}
+            </Picker>
+            <TextInput
+              style={styles.input}
+              placeholder="Value"
+              value={value}
+              onChangeText={(text) => {
+                setValue(text);
+                handleConvert(text);
+              }}
+              keyboardType="numeric"
+            />
+          </View>
+          <View style={styles.col}>
+            <TextInput
+              style={styles.input}
+              placeholder="Result"
+              value={convertedValue}
+              editable={false}
+            />
+            <Picker
+              selectedValue={currency1}
+              style={styles.picker}
+              onValueChange={(itemValue) => {
+                setCurrency1(itemValue);
+                handleConvert(value);
+              }}
+            >
+              {Currencies.map((curr) => (
+                <Picker.Item key={curr.code} label={`${curr.code} - ${curr.name}`} value={curr.code} />
+              ))}
+            </Picker>
+          </View>
+          <TouchableOpacity style={styles.btn} onPress={() => handleConvert(value)}>
+            <Text style={styles.btnText}>Converter</Text>
+          </TouchableOpacity>
         </View>
-        <View style={styles.col}>
-          <TextInput
-            style={styles.input}
-            placeholder="Result"
-            value={convertedValue}
-            editable={false}
-          />
-          <Picker
-            selectedValue={currency1}
-            style={styles.picker}
-            onValueChange={(itemValue) => {
-              setCurrency1(itemValue);
-              handleConvert(value); 
-            }}
-          >
-            {Currencies.map((curr) => (
-              <Picker.Item key={curr.code} label={`${curr.code} - ${curr.name}`} value={curr.code} />
-            ))}
-          </Picker>
-        </View>
-        <TouchableOpacity style={styles.btn} onPress={() => handleConvert(value)}>
-          <Text style={styles.btnText}>Converter</Text>
-        </TouchableOpacity>
-      </View>
-    </LinearGradient>
+      </LinearGradient>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -157,7 +161,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-
 });
 
 export default CurrencyConverter;
