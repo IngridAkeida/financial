@@ -10,7 +10,7 @@ import {
   Keyboard,
   ScrollView,
 } from 'react-native';
-import { Currencies } from '../../services/coinName';
+import { currencies } from '../../services/coinName';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Picker } from '@react-native-picker/picker';
 import { Dropdown } from 'react-native-element-dropdown';
@@ -33,7 +33,7 @@ const CurrencyConverter = () => {
   const [currency1, setCurrency1] = useState('');
   const [currency2, setCurrency2] = useState('');
   const [conversionRate, setConversionRate] = useState(0);
-  const currenciesCode = Currencies.map((curr) => curr.code);
+  const currenciesCode = currencies.map((curr) => curr.code);
   const [values, setValues] = useState<string | null>(null);
 
   useEffect(() => {
@@ -84,7 +84,7 @@ const CurrencyConverter = () => {
                   handleConvert(value);
                 }}
               >
-                {Currencies.map((curr) => (
+                {currencies.map((curr) => (
                   <Picker.Item key={curr.code} label={`${curr.code} - ${curr.name}`} value={curr.code} />
                 ))}
               </Picker>
@@ -99,7 +99,7 @@ const CurrencyConverter = () => {
                   handleConvert(value);
                 }}
               >
-                {Currencies.map((curr) => (
+                {currencies.map((curr) => (
                   <Picker.Item key={curr.code} label={`${curr.code} - ${curr.name}`} value={curr.code} />
                 ))}
               </Picker>
@@ -136,10 +136,10 @@ const CurrencyConverter = () => {
         selectedTextStyle={styles.selectedTextStyle}
         inputSearchStyle={styles.inputSearchStyle}
         iconStyle={styles.iconStyle}
-        data={Currencies}
+        data={currencies}
         search
         maxHeight={300}
-        labelField="code"
+        labelField="name"
         valueField="code"
         placeholder="Select item"
         searchPlaceholder="Search..."
