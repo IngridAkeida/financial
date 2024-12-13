@@ -17,7 +17,7 @@ const CurrencyConverter = () => {
   const [currency1, setCurrency1] = useState('USD');
   const [currency2, setCurrency2] = useState('BRL');
   const [conversionRate, setConversionRate] = useState(0);
-  const currencies = Currencies.map((curr) => curr.code);
+  const currenciesCode = Currencies.map((curr) => curr.code);
 
   useEffect(() => {
     const fetchConversionRate = async () => {
@@ -53,7 +53,19 @@ const CurrencyConverter = () => {
     >
       <View style={styles.wrap}>
         <Text style={styles.title}>Conversor de Moeda</Text>
-        <View style={styles.row}>
+        <View style={styles.col}>
+          <Picker
+            selectedValue={currency2}
+            style={styles.picker}
+            onValueChange={(itemValue) => {
+              setCurrency2(itemValue);
+              handleConvert(value); 
+            }}
+          >
+            {Currencies.map((curr) => (
+              <Picker.Item key={curr.code} label={curr.name} value={curr.code} />
+            ))}
+          </Picker>
           <TextInput
             style={styles.input}
             placeholder="Value"
@@ -64,20 +76,8 @@ const CurrencyConverter = () => {
             }}
             keyboardType="numeric"
           />
-          <Picker
-            selectedValue={currency2}
-            style={styles.picker}
-            onValueChange={(itemValue) => {
-              setCurrency2(itemValue);
-              handleConvert(value); 
-            }}
-          >
-            {currencies.map((curr) => (
-              <Picker.Item key={curr} label={curr} value={curr} />
-            ))}
-          </Picker>
         </View>
-        <View style={styles.row}>
+        <View style={styles.col}>
           <TextInput
             style={styles.input}
             placeholder="Result"
@@ -92,7 +92,7 @@ const CurrencyConverter = () => {
               handleConvert(value); 
             }}
           >
-            {currencies.map((curr) => (
+            {currenciesCode.map((curr) => (
               <Picker.Item key={curr} label={curr} value={curr} />
             ))}
           </Picker>
@@ -110,7 +110,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 16,
+  },
+  wrap: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff61',
+    width: '90%',
+    height: '90%',
+    borderRadius: 8,
   },
   title: {
     fontSize: 24,
@@ -118,29 +125,25 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  wrap: {
+  col: {
+    flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ffffff61',
-    padding: 16,
-    borderRadius: 8,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
     marginBottom: 16,
-    width: '90%',
-    marginBottom: 20,
+    width: '100%',
   },
   input: {
     flex: 1,
-    height: 50,
+    width: '100%',
     backgroundColor: '#f9f9f9',
     borderRadius: 4,
     paddingHorizontal: 8,
     borderWidth: 1,
     borderColor: '#ddd',
+  },
+  picker: {
+    width: 150,
+    backgroundColor: '#fff',
+    borderRadius: 4,
   },
   btn: {
     width: '90%',
@@ -154,12 +157,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
   },
-  picker: {
-    height: 200,
-    width: 150,
-    backgroundColor: '#fff',
-    borderRadius: 4,
-  },
+
 });
 
 export default CurrencyConverter;
