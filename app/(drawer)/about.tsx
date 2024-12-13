@@ -54,12 +54,6 @@ const CurrencyConverter = () => {
     <LinearGradient colors={['#05d9f5', '#006977', '#05d9f5']} style={styles.container}>
       <Text style={styles.title}>Conversor de Moeda</Text>
       <View>
-        <TextInput
-          placeholder="Valor"
-          value={value}
-          onChangeText={setValue}
-          keyboardType="numeric"
-        />
         <TouchableOpacity style={styles.btn} onPress={handleConvert}>
           <Text style={styles.btnText}>Converter</Text>
         </TouchableOpacity>
