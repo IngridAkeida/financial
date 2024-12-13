@@ -12,9 +12,7 @@ import {
 } from 'react-native';
 import { currencies } from '../../services/coinName';
 import { LinearGradient } from 'expo-linear-gradient';
-import { Picker } from '@react-native-picker/picker';
 import { Dropdown } from 'react-native-element-dropdown';
-import { AntDesign } from '@expo/vector-icons';
 
 const CurrencyConverter = () => {
   const [value, setValue] = useState('');
@@ -22,8 +20,6 @@ const CurrencyConverter = () => {
   const [currency1, setCurrency1] = useState('');
   const [currency2, setCurrency2] = useState('');
   const [conversionRate, setConversionRate] = useState(0);
-  const currenciesCode = currencies.map((curr) => curr.code);
-  const [values, setValues] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchConversionRate = async () => {
@@ -65,33 +61,37 @@ const CurrencyConverter = () => {
           <View style={styles.col}>
             <View style={styles.row}>
               <Text style={styles.title2}>From</Text>
-              <Picker
-                selectedValue={currency2}
-                style={styles.drop}
-                onValueChange={(itemValue) => {
-                  setCurrency2(itemValue);
+              <Dropdown
+                value={currency2}
+                data={currencies.map((curr) => ({
+                  label: curr.name,
+                  value: curr.code,
+                }))}
+                labelField="label"
+                valueField="value"
+                onChange={(item) => {
+                  setCurrency2(item.value);
                   handleConvert(value);
                 }}
-              >
-                {currencies.map((curr) => (
-                  <Picker.Item key={curr.code} label={`${curr.code} - ${curr.name}`} value={curr.code} />
-                ))}
-              </Picker>
+                style={styles.drop}
+              />
             </View>
             <View style={styles.row}>
               <Text style={styles.title2}>To</Text>
-              <Picker
-                selectedValue={currency1}
-                style={styles.drop}
-                onValueChange={(itemValue) => {
-                  setCurrency1(itemValue);
+              <Dropdown
+                value={currency1}
+                data={currencies.map((curr) => ({
+                  label: curr.name,
+                  value: curr.code,
+                }))}
+                labelField="label"
+                valueField="value"
+                onChange={(item) => {
+                  setCurrency1(item.value);
                   handleConvert(value);
                 }}
-              >
-                {currencies.map((curr) => (
-                  <Picker.Item key={curr.code} label={`${curr.code} - ${curr.name}`} value={curr.code} />
-                ))}
-              </Picker>
+                style={styles.drop}
+              />
             </View>
             <TextInput
               style={styles.input}
@@ -119,7 +119,7 @@ const CurrencyConverter = () => {
           </TouchableOpacity>
         </View>
         <View>
-        <Dropdown
+        {/* <Dropdown
         style={styles.dropdown}
         placeholderStyle={styles.placeholderStyle}
         selectedTextStyle={styles.selectedTextStyle}
@@ -130,16 +130,16 @@ const CurrencyConverter = () => {
         maxHeight={300}
         labelField="name"
         valueField="code"
-        placeholder="Select item"
+        placeholder="Coin"
         searchPlaceholder="Search..."
         value={values}
         onChange={item => {
           setValues(item.code);
         }}
         renderLeftIcon={() => (
-          <AntDesign style={styles.icon} color="black" name="Safety" size={20} />
+          <AntDesign name="table" size={20} color="black" style={styles.icon} />
         )}
-      />
+        /> */}
         </View>
       </LinearGradient>
     </TouchableWithoutFeedback>
@@ -152,13 +152,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    height: 750,
   },
   wrap: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#ffffff61',
     width: '90%',
-    height: '90%',
+    height: '50%',
     borderRadius: 8,
   },
   title: {
