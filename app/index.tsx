@@ -1,11 +1,11 @@
-import { Image, SafeAreaView, StyleSheet, Text, View } from "react-native";
+import {Image, StyleSheet, Text, View } from "react-native";
 import { router } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
+import { Btn } from "../components/button";
 
 export default function index() {
-
   const handleStart = () => {
-    router.replace('/home');
+    router.replace('/about');
   }
   return (
     <LinearGradient colors={['#00a1b6', '#006977', '#00a1b6']} style={styles.container}>
@@ -13,7 +13,7 @@ export default function index() {
       <View>
         <Text style={styles.h1}>Take Control</Text>
         <Text style={styles.h2}>quotes around the World</Text>
-        {/* <Button title="Let's Start!" onPress={handleStart}/> */}
+        <Btn label="Let's Start!" onPress={handleStart}/>
       </View>
     </LinearGradient>
   );
@@ -47,4 +47,9 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     fontWeight: 'light',
   },
+  buttonStart: {
+    backgroundColor: '#fff',
+    color: '#00a1b6',
+    borderRadius: 10,
+  }
 });
