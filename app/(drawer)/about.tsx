@@ -29,12 +29,15 @@ const CurrencyConverter = () => {
           `https://economia.awesomeapi.com.br/json/last/${currencyPair}`
         );
         const data = await response.json();
-        const rate = data[currencyPair]?.bid || 0;
-        console.log(rate, currencyPair, data, data[currencyPair]);
-        setConversionRate(parseFloat(rate));
-        handleConvert(value);
+        if(data[`${currency1}${currency2}`]) {
+          const rate = data[`${currency1}${currency2}`].bid;
+          setConversionRate(parseFloat(rate));
+          handleConvert(value);
+          console.log(rate);
+        } 
+        return 0;
       } catch (error) {
-        Alert.alert('Erro', 'Não foi possível buscar a taxa de conversão.');
+        return 0;
       }
     };
     fetchConversionRate();
@@ -76,6 +79,16 @@ const CurrencyConverter = () => {
                 style={styles.drop}
               />
             </View>
+            <TextInput
+              style={styles.input}
+              placeholder="Value"
+              value={value}
+              onChangeText={(text) => {
+                setValue(text);
+                handleConvert(text);
+              }}
+              keyboardType="numeric"
+            />
             <View style={styles.row}>
               <Text style={styles.title2}>To</Text>
               <Dropdown
@@ -93,53 +106,17 @@ const CurrencyConverter = () => {
                 style={styles.drop}
               />
             </View>
-            <TextInput
-              style={styles.input}
-              placeholder="Value"
-              value={value}
-              onChangeText={(text) => {
-                setValue(text);
-                handleConvert(text);
-              }}
-              keyboardType="numeric"
-            />
-          </View>
-          <View style={styles.col}>
-          
-            <TextInput
-              style={styles.input}
-              placeholder="Result"
-              value={convertedValue}
-              editable={false}
-            />
-
           </View>
           <TouchableOpacity style={styles.btn} onPress={() => handleConvert(value)}>
             <Text style={styles.btnText}>Converter</Text>
           </TouchableOpacity>
+          <View style={styles.col}>
+          <Text style={styles.text}>
+            {convertedValue ? `${convertedValue} ${currency2}` : "Insira valores para converter"}
+          </Text>
+          </View>
         </View>
         <View>
-        {/* <Dropdown
-        style={styles.dropdown}
-        placeholderStyle={styles.placeholderStyle}
-        selectedTextStyle={styles.selectedTextStyle}
-        inputSearchStyle={styles.inputSearchStyle}
-        iconStyle={styles.iconStyle}
-        data={currencies}
-        search
-        maxHeight={300}
-        labelField="name"
-        valueField="code"
-        placeholder="Coin"
-        searchPlaceholder="Search..."
-        value={values}
-        onChange={item => {
-          setValues(item.code);
-        }}
-        renderLeftIcon={() => (
-          <AntDesign name="table" size={20} color="black" style={styles.icon} />
-        )}
-        /> */}
         </View>
       </LinearGradient>
     </TouchableWithoutFeedback>
@@ -175,6 +152,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     color: '#fff',
   },
+  text: {
+    fontSize: 20,
+    marginBottom: 10,
+    fontWeight: 'bold',
+    marginLeft: 10,
+    color: '#fff',
+  },
   col: {
     flexDirection: 'column',
     alignItems: 'center',
@@ -187,6 +171,7 @@ const styles = StyleSheet.create({
     width: '90%',
     backgroundColor: '#f9f9f940',
     borderRadius: 4,
+    height: 50,
   },
   input: {
     width: '90%',
