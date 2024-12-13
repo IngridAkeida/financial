@@ -20,7 +20,7 @@ const CurrencyConverter = () => {
         const rate = data[`${currency}`].bid;
         setConversionRate(rate);
       } catch (error) {
-        Alert.alert('Erro', 'Não foi possível buscar a taxa de conversão.');
+        // Alert.alert('Erro', 'Não foi possível buscar a taxa de conversão.');
       }
     };
     fetchConversionRate();
@@ -37,7 +37,7 @@ const CurrencyConverter = () => {
   };
 
   return (
-    <LinearGradient colors={['#00a1b6', '#006977', '#00a1b6']} style={styles.container} style={styles.container}>
+    <LinearGradient colors={['#00a1b6', '#006977', '#00a1b6']} style={styles.container}>
       <Text style={styles.title}>Conversor de Moeda</Text>
       <View style={styles.wrap}>
         <TextInput
@@ -77,7 +77,6 @@ const CurrencyConverter = () => {
           ))}
         </Picker>
       </View>
-      
       <Button title="Converter" onPress={handleConvert} />
     </LinearGradient>
   );
@@ -89,7 +88,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#fff',
   },
   title: {
     fontSize: 24,
@@ -104,11 +102,15 @@ const styles = StyleSheet.create({
   },
   picker: {
     width: '50%',
+    backgroundColor: '#f9f9f9',
+    margin: 8,
+    borderRadius: 4,
   },
   wrap: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
+    alignItems: 'center',
   },
 });
 
