@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { Currencies } from '../../services/coinName';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Picker } from '@react-native-picker/picker';
 
 const CurrencyConverter = () => {
   const [value, setValue] = useState('');
@@ -17,6 +18,7 @@ const CurrencyConverter = () => {
   const [currency2, setCurrency2] = useState('BRL');
   const [conversionRate, setConversionRate] = useState(0);
   const currencies = Currencies.map((curr) => curr.code);
+  const [selectedValue, setSelectedValue] = useState('option1');
 
   useEffect(() => {
     const fetchConversionRate = async () => {
@@ -59,7 +61,33 @@ const CurrencyConverter = () => {
             onChangeText={setValue}
             keyboardType="numeric"
           />
-
+          <Picker
+            selectedValue={selectedValue}
+            style={styles.picker}
+            onValueChange={(itemValue) => setSelectedValue(itemValue)}
+          >
+            {currencies.map((curr) => (
+              <Picker.Item key={curr} label={curr} value={curr} />
+            ))}
+          </Picker>
+        </View>
+        <View style={styles.row}>
+          <TextInput
+            style={styles.input}
+            placeholder="Value"
+            value={value}
+            onChangeText={setValue}
+            keyboardType="numeric"
+          />
+          <Picker
+            selectedValue={selectedValue}
+            style={styles.picker}
+            onValueChange={(itemValue) => setSelectedValue(itemValue)}
+          >
+            {currencies.map((curr) => (
+              <Picker.Item key={curr} label={curr} value={curr} />
+            ))}
+          </Picker>
         </View>
         <View style={styles.row}>
           <Text style={styles.convertedValue}>{convertedValue || 'Resultado'}</Text>
@@ -119,6 +147,16 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  convertedValue: {
+    fontSize: 24,
+    color: '#333',
+    fontWeight: 'bold',
+  },
+  picker: {
+    height: 50,
+    width: 150,
+    backgroundColor: '#333',
   },
 });
 
