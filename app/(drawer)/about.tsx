@@ -65,10 +65,10 @@ const CurrencyConverter = () => {
             keyboardType="numeric"
           />
           <Picker
-            selectedValue={currency1}
+            selectedValue={currency2}
             style={styles.picker}
             onValueChange={(itemValue) => {
-              setCurrency1(itemValue);
+              setCurrency2(itemValue);
               handleConvert(value); 
             }}
           >
@@ -85,10 +85,10 @@ const CurrencyConverter = () => {
             editable={false}
           />
           <Picker
-            selectedValue={currency2}
+            selectedValue={currency1}
             style={styles.picker}
             onValueChange={(itemValue) => {
-              setCurrency2(itemValue);
+              setCurrency1(itemValue);
               handleConvert(value); 
             }}
           >
